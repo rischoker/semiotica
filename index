@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Semiótica: Hackea el Código Invisible</title>
+    <style>
+        /* RESET & BASE STYLES */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        :root {
+            --bg-dark: #0b0f19;
+            --card-bg: rgba(255, 255, 255, 0.04);
+            --border-light: rgba(255, 255, 255, 0.1);
+            --cyan: #38bdf8;
+            --rose: #f43f5e;
+            --emerald: #10b981;
+            --violet: #a855f7;
+            --text-muted: #94a3b8;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+            background-color: var(--bg-dark);
+            color: #ffffff;
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+
+        /* SCROLL CONTAINER & SLIDES */
+        .slide {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 40px 20px;
+            position: relative;
+        }
+
+        /* PANTALLA 1: INTRODUCCIÓN */
+        .intro {
+            background: radial-gradient(circle at center, #1e1b4b 0%, #0b0f19 100%);
+        }
+
+        h1 {
+            font-size: clamp(2.2rem, 5vw, 4rem);
+            margin-bottom: 20px;
+            color: var(--cyan);
+            text-shadow: 0 0 25px rgba(56, 189, 248, 0.3);
+            letter-spacing: -1px;
+            max-width: 900px;
+        }
+
+        .subtitle {
+            font-size: clamp(1.1rem, 2.5vw, 1.5rem);
+            color: var(--text-muted);
+            max-width: 650px;
+            margin-bottom: 25px;
+            font-style: italic;
+        }
+
+        .intro-text {
+            max-width: 680px;
+            font-size: 1.15rem;
+            color: #e2e8f0;
+            margin-bottom: 40px;
+        }
+
+        .scroll-hint {
+            color: var(--cyan);
+            font-weight: 600;
+            font-size: 1.05rem;
+            animation: bounce 2s infinite;
+            cursor: pointer;
+            text-decoration: none;
+        }
+
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+            40% { transform: translateY(-10px); }
+            60% { transform: translateY(-5px); }
+        }
+
+        /* PANTALLA 2: SAUSSURE & CARD 3D */
+        .saussure-section {
+            background: #111827;
+        }
+
+        .section-title {
+            font-size: clamp(1.8rem, 4vw, 2.8rem);
+            margin-bottom: 25px;
+            color: #ffffff;
+        }
+
+        .concept-intro {
+            color: var(--text-muted);
+            max-width: 600px;
+            margin-bottom: 35px;
+            font-size: 1.1rem;
+        }
+
+        /* TARJETA 3D INTERACTIVA */
+        .flip-card-container {
+            perspective: 1000px;
+            width: 100%;
+            max-width: 480px;
+            height: 320px;
+            margin: 0 auto;
+            cursor: pointer;
+        }
+
+        .flip-card {
+            width: 100%;
+            height: 100%;
+            position: relative;
+            transform-style: preserve-3d;
+            transition: transform 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        .flip-card-container:hover .flip-card,
+        .flip-card.flipped {
+            transform: rotateY(180deg);
+        }
+
+        .card-front, .card-back {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            backface-visibility: hidden;
+            border-radius: 20px;
+            padding: 30px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            background: var(--card-bg);
+            backdrop-filter: blur(12px);
+            border: 1px solid var(--border-light);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5);
+        }
+
+        .card-front {
+            border-color: rgba(244, 63, 94, 0.4);
+        }
+
+        .card-back {
+            transform: rotateY(180deg);
+            border-color: rgba(56, 189, 248, 0.4);
+        }
+
+        .badge {
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-weight: 700;
+            padding: 6px 14px;
+            border-radius: 20px;
+            margin-bottom: 15px;
+        }
+
+        .badge-significante {
+            background: rgba(244, 63, 94, 0.2);
+            color: var(--rose);
+        }
+
+        .badge-significado {
+            background: rgba(56, 189, 248, 0.2);
+            color: var(--cyan);
+        }
+
+        .card-emoji {
+            font-size: 4.5rem;
+            margin: 10px 0;
+            filter: drop-shadow(0 0 15px rgba(255,255,255,0.2));
+        }
+
+        .flip-instruction {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            margin-top: 15px;
+        }
+
+        /* PANTALLA 3: PEIRCE Y TRIADA */
+        .peirce-section {
+            background: #0f172a;
+        }
+
+        .grid-triad {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+            max-width: 1100px;
+            width: 100%;
+            margin-top: 30px;
+        }
+
+        .triad-card {
+            background: var(--card-bg);
+            backdrop-filter: blur(10px);
+            border: 1px solid var(--border-light);
+            border-radius: 16px;
+            padding: 30px 20px;
+            text-align: left;
+            transition: all 0.4s ease;
+            opacity: 0;
+            transform: translateY(30px);
+        }
+
+        .triad-card.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .triad-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 12px 30px rgba(0,0,0,0.4);
+        }
+
+        .triad-icon {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+            display: inline-block;
+        }
+
+        .triad-title {
+            font-size: 1.3rem;
+            margin-bottom: 10px;
+            color: #ffffff;
+        }
+
+        .triad-card:nth-child(1) { border-top: 4px solid var(--emerald); }
+        .triad-card:nth-child(2) { border-top: 4px solid #f97316; }
+        .triad-card:nth-child(3) { border-top: 4px solid var(--violet); }
+
+        .example-box {
+            margin-top: 15px;
+            padding: 10px 12px;
+            background: rgba(255, 255, 255, 0.03);
+            border-left: 3px solid var(--text-muted);
+            font-size: 0.95rem;
+            color: #cbd5e1;
+        }
+
+        /* PANTALLA 4: FINAL & WORDWALL */
+        .final-section {
+            background: radial-gradient(circle at center, #1e1b4b 0%, #050811 100%);
+        }
+
+        .btn-wordwall {
+            display: inline-block;
+            background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+            color: #ffffff;
+            padding: 18px 40px;
+            font-size: 1.25rem;
+            font-weight: bold;
+            text-decoration: none;
+            border-radius: 50px;
+            box-shadow: 0 10px 30px rgba(16, 185, 129, 0.4);
+            transition: all 0.3s ease;
+            margin-top: 35px;
+            letter-spacing: 0.5px;
+        }
+
+        .btn-wordwall:hover {
+            transform: translateY(-4px) scale(1.03);
+            box-shadow: 0 15px 35px rgba(16, 185, 129, 0.6);
+            background: linear-gradient(135deg, #34d399 0%, #059669 100%);
+        }
+
+        /* ANIMACIONES SCROLL REVEAL */
+        .reveal {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: all 0.8s cubic-bezier(0.2, 0.8, 0.2, 1);
+        }
+
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+</head>
+<body>
+
+    <!-- PANTALLA 1: EL GANCHO -->
+    <section class="slide intro" id="inicio">
+        <h1 class="reveal">HACKEA EL CÓDIGO INVISIBLE DE TU MENTE</h1>
+        <p class="subtitle reveal">Estás rodeado de mensajes ocultos... y tu cerebro los descifra sin pedirte permiso.</p>
+        <p class="intro-text reveal">
+            Vivimos inmersos en un océano de imágenes, sonidos, colores y formas.<br>
+            Sin tocar una sola tecla, tu mente procesa miles de señales secretas a cada segundo.<br>
+            Bienvenido a la <strong>Semiótica</strong>: el superpoder definitivo para leer lo que el mundo intenta decirte.
+        </p>
+        <a href="#saussure" class="scroll-hint reveal">
+            👇 Desliza para ponerte las gafas de detective visual y activar el radar...
+        </a>
+    </section>
+
+    <!-- PANTALLA 2: SAUSSURE -->
+    <section class="slide saussure-section" id="saussure">
+        <h2 class="section-title reveal">EL BINOMIO PERFECTO: LA CÁPSULA DEL SIGNO</h2>
+        <p class="concept-intro reveal">
+            El lingüista Ferdinand de Saussure descubrió que cada estímulo no es una simple imagen aislada; es un <strong>Signo</strong>, una estructura inseparable de dos caras.
+        </p>
+
+        <!-- TARJETA 3D INTERACTIVA -->
+        <div class="flip-card-container reveal">
+            <div class="flip-card" id="card3d" onclick="this.classList.toggle('flipped')">
+                <!-- CARA A: SIGNIFICANTE -->
+                <div class="card-front">
+                    <span class="badge badge-significante">Significante (Forma Física)</span>
+                    <div class="card-emoji">💀</div>
+                    <p style="color: #e2e8f0; font-size: 0.95rem;">
+                        Un arreglo específico de píxeles en tu pantalla que forman la imagen digital de una calavera blanca con cuencas oscuras.
+                    </p>
+                    <span class="flip-instruction">👉 Haz clic para girar la moneda</span>
+                </div>
+                <!-- CARA B: SIGNIFICADO -->
+                <div class="card-back">
+                    <span class="badge badge-significado">Significado (Concepto Mental)</span>
+                    <h3 style="color: var(--cyan); margin-bottom: 10px;">"¡Me muero de la risa!"</h3>
+                    <p style="color: #cbd5e1; font-size: 0.95rem;">
+                        La idea instantánea de un humor absurdo, algo tan gracioso que te deja sin aliento en la cultura digital actual.
+                    </p>
+                    <span class="flip-instruction">👈 Haz clic para regresar</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- PANTALLA 3: PEIRCE -->
+    <section class="slide peirce-section" id="peirce">
+        <h2 class="section-title reveal">LOS TRES MOSQUETEROS DEL SENTIDO</h2>
+        <p class="concept-intro reveal">
+            El filósofo Charles Sanders Peirce demostró que no todos los signos se conectan de la misma forma con la realidad. Se dividen en 3 niveles de profundidad:
+        </p>
+
+        <div class="grid-triad">
+            <!-- ÍCONO -->
+            <div class="triad-card">
+                <span class="triad-icon">🖼️</span>
+                <h3 class="triad-title" style="color: var(--emerald);">1. Ícono (Semejanza Pura)</h3>
+                <p style="color: #cbd5e1; font-size: 0.95rem;">Imita directamente a la realidad que representa.</p>
+                <div class="example-box">
+                    <strong>Ejemplo:</strong> El icono de la <em>papelera de reciclaje</em> en tu pantalla; se ve exactamente igual a un bote de basura físico.
+                </div>
+            </div>
+
+            <!-- ÍNDICE -->
+            <div class="triad-card">
+                <span class="triad-icon">🔥</span>
+                <h3 class="triad-title" style="color: #f97316;">2. Índice (Causa-Efecto)</h3>
+                <p style="color: #cbd5e1; font-size: 0.95rem;">No copia la realidad, la evidencia; es una pista directa en el entorno.</p>
+                <div class="example-box">
+                    <strong>Ejemplo:</strong> La <em>batería en 1% y roja</em> en tu smartphone. Nadie dice una palabra, pero sabes que el apagón es inminente.
+                </div>
+            </div>
+
+            <!-- SÍMBOLO -->
+            <div class="triad-card">
+                <span class="triad-icon">🌍</span>
+                <h3 class="triad-title" style="color: var(--violet);">3. Símbolo (Pacto Social)</h3>
+                <p style="color: #cbd5e1; font-size: 0.95rem;">No hay parecido ni causa física; funciona por un acuerdo cultural colectivo.</p>
+                <div class="example-box">
+                    <strong>Ejemplo:</strong> El <em>icono de Wi-Fi</em> 📶. Esas tres líneas curvas solo significan "conexión a internet" porque nuestra sociedad así lo pactó.
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- PANTALLA 4: DESAFÍO FINAL -->
+    <section class="slide final-section" id="desafio">
+        <h2 class="section-title reveal" style="color: #38bdf8;">¡MISIÓN CUMPLIDA! ¿TIENES OJOS DE SEMIÓTICO?</h2>
+        <p class="subtitle reveal" style="color: #e2e8f0; max-width: 700px;">
+            Has unlocked el mapa mental para interpretar los códigos invisibles que mueven el mundo.<br>
+            Es momento de probar tu velocidad de reacción y demostrar que nada se te escapa.
+        </p>
+
+        <!-- ENLACE A WORDWALL -->
+        <div class="reveal">
+            <a href="https://wordwall.net" target="_blank" rel="noopener" class="btn-wordwall">
+                🚀 ACEPTAR EL RETO Y ENTRAR A WORDWALL
+            </a>
+        </div>
+    </section>
+
+    <!-- JAVASCRIPT: SCROLLYTELLING ANIMATIONS -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // Observer para elementos con clase .reveal
+            const revealObserver = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('active');
+                    }
+                });
+            }, {
+                threshold: 0.15
+            });
+
+            document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
+
+            // Observer en cascada para las tarjetas de Peirce
+            const triadCards = document.querySelectorAll('.triad-card');
+            const triadObserver = new IntersectionObserver((entries) => {
+                entries.forEach((entry) => {
+                    if (entry.isIntersecting) {
+                        triadCards.forEach((card, index) => {
+                            setTimeout(() => {
+                                card.classList.add('visible');
+                            }, index * 200);
+                        });
+                    }
+                });
+            }, {
+                threshold: 0.2
+            });
+
+            if (triadCards.length > 0) {
+                triadObserver.observe(triadCards[0].parentElement);
+            }
+        });
+    </script>
+</body>
+</html>
