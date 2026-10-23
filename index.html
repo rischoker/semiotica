@@ -255,7 +255,44 @@ button:focus-visible,a:focus-visible,input:focus-visible+.cmp-handle{outline:3px
 .cta{display:inline-flex;align-items:center;gap:12px;font:800 clamp(15px,2vw,21px)/1.2 var(--display);color:var(--void);text-decoration:none;padding:20px 32px;border-radius:999px;background:linear-gradient(100deg,var(--lime),var(--cyan));animation:halo 2.2s ease-in-out infinite}
 @keyframes halo{0%,100%{box-shadow:0 0 22px 2px rgba(125,255,176,.45)}50%{box-shadow:0 0 50px 12px rgba(125,255,176,.65)}}
 
+
+/* Objetivo */
+.obj{display:grid;grid-template-columns:1.15fr 1fr;gap:clamp(20px,3vw,40px);align-items:center}
+.obj>*{min-width:0}
+.obj-main{font-family:var(--display);font-weight:700;font-size:clamp(19px,2.4vw,30px);line-height:1.3;text-wrap:balance}
+.obj-main .v1{color:var(--magenta)}.obj-main .v2{color:var(--cyan)}
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.chip{font-family:var(--mono);font-size:12px;padding:7px 11px;border-radius:8px;border:1px solid var(--edge);background:rgba(255,255,255,.04);color:var(--ink)}
+.obj-list{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:10px;counter-reset:o}
+.obj-list li{display:grid;grid-template-columns:32px 1fr;gap:12px;align-items:start;padding:12px 14px;border-radius:12px;border:1px solid var(--edge);background:rgba(255,255,255,.03)}
+.obj-list li::before{counter-increment:o;content:counter(o);display:grid;place-items:center;width:32px;height:32px;border-radius:50%;font:700 14px/1 var(--mono);color:var(--void);background:var(--c)}
+.obj-list p{font-size:15px}
+.obj-list b{color:var(--c)}
+.obj-list small{display:block;font-family:var(--mono);font-size:11px;color:var(--muted);margin-top:4px;letter-spacing:.04em}
+
+/* Acerca de este OVA */
+.about-grid{display:grid;grid-template-columns:1fr 1fr;gap:clamp(20px,3vw,36px);margin-top:20px;align-items:start}
+.about-grid>*{min-width:0}
+.about-block{display:flex;flex-direction:column;gap:10px}
+.about-block+.about-block{margin-top:22px}
+.about-block h3{font-family:var(--mono);font-size:12px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--lime)}
+.meta{margin:0;display:grid;grid-template-columns:max-content 1fr;gap:7px 16px;font-size:14px}
+.meta dt{font-family:var(--mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--cyan);padding-top:3px}
+.meta dd{margin:0;color:var(--ink);min-width:0;overflow-wrap:anywhere}
+.seq{margin:0;padding:0;list-style:none;display:flex;flex-direction:column;gap:6px;font-size:14px;color:var(--muted)}
+.seq li{display:flex;justify-content:space-between;gap:12px;border-bottom:1px dashed var(--edge);padding-bottom:6px}
+.seq li span:last-child{font-family:var(--mono);font-variant-numeric:tabular-nums;color:var(--ink);white-space:nowrap}
+.std{border-radius:12px;border:1px solid var(--edge);background:rgba(255,255,255,.03);padding:12px 14px;font-size:14px;color:var(--muted)}
+.std b{display:block;font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--gold);margin-bottom:6px}
+.std p+p{margin-top:6px}
+.std em{color:var(--ink)}
+.refs{margin:0;padding:0;list-style:none;display:flex;flex-direction:column;gap:8px;font-size:14px;color:var(--muted)}
+.refs li{padding-left:1.8em;text-indent:-1.8em}
+.refs em{color:var(--ink)}
+.small{font-size:13px;color:var(--muted)}
+
 @media (max-width:900px){
+  .obj,.about-grid{grid-template-columns:1fr}
   .grid2,.hero .row,.meaning,.adzone{grid-template-columns:1fr}
   .cards3,.recap{grid-template-columns:1fr}
   .author{grid-template-columns:110px 1fr}
@@ -264,6 +301,8 @@ button:focus-visible,a:focus-visible,input:focus-visible+.cmp-handle{outline:3px
 @media (max-width:520px){
   body{font-size:16px}
   .faces,.levels{grid-template-columns:1fr}
+  .meta{grid-template-columns:1fr;gap:2px}
+  .meta dd{margin-bottom:8px}
   .author{grid-template-columns:1fr}
   .author .portrait{flex-direction:row;align-items:center}
   .author .portrait .frame{width:96px;flex:none}
@@ -289,6 +328,7 @@ button:focus-visible,a:focus-visible,input:focus-visible+.cmp-handle{outline:3px
       <a href="#peirce" data-g="peirce">Peirce</a>
       <a href="#barthes" data-g="barthes">Barthes</a>
       <a href="#desafio" data-g="desafio">El Desafío</a>
+      <a href="#acerca" data-g="acerca">Acerca</a>
     </nav>
     <a class="go" href="#desafio">Ir al Reto 🚀</a>
   </div>
@@ -298,6 +338,7 @@ button:focus-visible,a:focus-visible,input:focus-visible+.cmp-handle{outline:3px
 <!-- Pista de scroll: cada ancla es una parada de la cámara -->
 <div class="track" id="track">
   <div class="stop" id="gancho"></div>
+  <div class="stop" id="objetivo"></div>
   <div class="stop" id="saussure"></div>
   <div class="stop" id="comparador"></div>
   <div class="stop" id="tarjeta"></div>
@@ -307,6 +348,7 @@ button:focus-visible,a:focus-visible,input:focus-visible+.cmp-handle{outline:3px
   <div class="stop" id="barthes"></div>
   <div class="stop" id="anuncio"></div>
   <div class="stop" id="desafio"></div>
+  <div class="stop" id="acerca"></div>
 </div>
 
 <div class="stage" id="stage">
@@ -329,6 +371,30 @@ button:focus-visible,a:focus-visible,input:focus-visible+.cmp-handle{outline:3px
       </div>
     </div>
     <div class="enter"><span class="ring" aria-hidden="true"></span>Desliza, usa la flecha ↓ o el botón ▼ para entrar al túnel de los signos.</div>
+  </div>
+
+  <!-- OBJETIVO -->
+  <div class="layer panel" data-g="gancho" data-tint=".8,.85,1">
+    <div class="obj">
+      <div class="stack">
+        <span class="tag" style="align-self:flex-start">Objetivo de aprendizaje</span>
+        <p class="obj-main">El estudiante <span class="v1">identifica y analiza</span> los signos verbales y no verbales presentes en la lengua española, los medios y la cultura digital, aplicando los aportes de Saussure, Peirce y Barthes para <span class="v2">interpretar críticamente</span> los mensajes que recibe a diario.</p>
+        <div class="chips">
+          <span class="chip">Básica secundaria · 6.º a 9.º</span>
+          <span class="chip">Lengua castellana</span>
+          <span class="chip">40–50 min aprox.</span>
+        </div>
+      </div>
+      <div class="stack" style="gap:10px">
+        <span class="hint">Al terminar el recorrido, el estudiante:</span>
+        <ol class="obj-list">
+          <li style="--c:#ff3d9a"><p><b>Diferencia</b> significante y significado, y reconoce la arbitrariedad del signo lingüístico.<small>Saussure · comparador de memes · tarjeta 3D</small></p></li>
+          <li style="--c:#7dffb0"><p><b>Clasifica</b> signos de su vida cotidiana como íconos, índices o símbolos.<small>Peirce · laboratorio de signos</small></p></li>
+          <li style="--c:#e8c26a"><p><b>Distingue</b> denotación y connotación en un anuncio y explica los valores que transmite.<small>Barthes · anuncio interactivo</small></p></li>
+          <li style="--c:#31e6ff"><p><b>Demuestra</b> lo aprendido en una evaluación gamificada.<small>Reto final · Kahoot</small></p></li>
+        </ol>
+      </div>
+    </div>
   </div>
 
   <!-- 1 · SAUSSURE -->
@@ -567,6 +633,86 @@ button:focus-visible,a:focus-visible,input:focus-visible+.cmp-handle{outline:3px
     <a class="cta" id="cta" href="https://play.kahoot.it/v2/gameblock?quizId=8e825fe1-6373-4348-8610-81b731e55643" target="_blank" rel="noopener">🚀 Aceptar el reto y entrar a Kahoot</a>
     <p class="hint">Se abrirá una experiencia interactiva gamificada en una nueva pestaña.</p>
   </div>
+
+  <!-- ACERCA DE ESTE OVA -->
+  <div class="layer panel" data-g="acerca" data-tint=".75,.8,1">
+    <span class="tag">Acerca de este OVA</span>
+    <h2 style="margin-top:12px;font-size:clamp(24px,3.4vw,40px)">Ficha del recurso</h2>
+    <div class="about-grid">
+      <div>
+        <div class="about-block">
+          <h3>Metadatos</h3>
+          <dl class="meta">
+            <dt>Título</dt><dd>Semiótica en Español: hackea el código invisible</dd>
+            <dt>Descripción</dt><dd>OVA interactivo que introduce el signo lingüístico (Saussure), los tipos de signo (Peirce) y la denotación y connotación (Barthes) con ejemplos de la lengua española, memes y publicidad.</dd>
+            <dt>Autor</dt><dd>Leonardo (rischoker)</dd>
+            <dt>Nivel</dt><dd>Educación básica secundaria, 6.º a 9.º</dd>
+            <dt>Área</dt><dd>Humanidades · Lengua castellana</dd>
+            <dt>Palabras clave</dt><dd>semiótica, signo lingüístico, significante, significado, ícono, índice, símbolo, denotación, connotación, publicidad, memes</dd>
+            <dt>Tipo</dt><dd>Objeto Virtual de Aprendizaje: contenidos, actividades interactivas y evaluación</dd>
+            <dt>Idioma</dt><dd>Español</dd>
+            <dt>Duración</dt><dd>40–50 minutos aprox.</dd>
+            <dt>Formato</dt><dd>HTML5 y JavaScript (Three.js, GSAP)</dd>
+            <dt>Requisitos</dt><dd>Navegador actualizado con WebGL, conexión a internet; mouse, teclado o pantalla táctil</dd>
+            <dt>Versión</dt><dd>1.0 · octubre de 2026</dd>
+            <dt>Licencia</dt><dd>CC BY-NC-SA 4.0</dd>
+            <dt>Ubicación</dt><dd>github.com/rischoker/semiotica</dd>
+          </dl>
+        </div>
+        <div class="about-block">
+          <h3>Contextualización y uso</h3>
+          <p class="small"><strong style="color:var(--ink)">Destinatarios:</strong> estudiantes de 6.º a 9.º. No requiere conocimientos previos de semiótica.</p>
+          <p class="small"><strong style="color:var(--ink)">Rol docente:</strong> proyectar el OVA en la pantalla del aula, avanzar con ▼ y detenerse en las preguntas PIENSA y DEBATE para la discusión en grupo.</p>
+          <ul class="seq" aria-label="Secuencia sugerida">
+            <li><span>Gancho y objetivo</span><span>5 min</span></li>
+            <li><span>Saussure, comparador y tarjeta 3D</span><span>10 min</span></li>
+            <li><span>Peirce y laboratorio de signos</span><span>12 min</span></li>
+            <li><span>Barthes, anuncio y debate</span><span>10 min</span></li>
+            <li><span>Evaluación en Kahoot</span><span>10 min</span></li>
+          </ul>
+          <p class="small"><strong style="color:var(--ink)">Evaluación:</strong> formativa en el laboratorio de signos (meta: 80 %) y sumativa en el Kahoot final.</p>
+        </div>
+      </div>
+      <div>
+        <div class="about-block">
+          <h3>Estándares Básicos de Competencias en Lenguaje (MEN, 2006)</h3>
+          <p class="small">Factor: Medios de comunicación y otros sistemas simbólicos.</p>
+          <div class="std"><b>6.º a 7.º</b>
+            <p><em>Caracterizo los medios de comunicación masiva y selecciono la información que emiten para clasificarla y almacenarla.</em></p>
+            <p><em>Relaciono de manera intertextual obras que emplean el lenguaje no verbal y obras que emplean el lenguaje verbal.</em></p>
+          </div>
+          <div class="std"><b>8.º a 9.º</b>
+            <p><em>Retomo crítica y selectivamente la información que circula a través de los medios de comunicación masiva, para confrontarla con la que proviene de otras fuentes.</em> En especial: <em>Interpreto elementos políticos, culturales e ideológicos que están presentes en la información que difunden los medios masivos y adopto una posición crítica frente a ellos.</em></p>
+            <p><em>Comprendo los factores sociales y culturales que determinan algunas manifestaciones del lenguaje no verbal.</em></p>
+          </div>
+        </div>
+        <div class="about-block">
+          <h3>Referencias</h3>
+          <ul class="refs">
+            <li>Barthes, R. (1980). <em>Mitologías</em> (H. Schmucler, Trad.). Siglo XXI Editores. (Obra original publicada en 1957)</li>
+            <li>Barthes, R. (1986). Retórica de la imagen. En <em>Lo obvio y lo obtuso: imágenes, gestos, voces</em> (C. Fernández Medrano, Trad.). Paidós. (Obra original publicada en 1964)</li>
+            <li>Chiappe, A., Segovia, Y. y Rincón, H. Y. (2007). Toward an instructional design model based on learning objects. <em>Educational Technology Research and Development, 55</em>(6), 671–681.</li>
+            <li>Eco, U. (2000). <em>Tratado de semiótica general</em> (C. Manzano, Trad.). Lumen. (Obra original publicada en 1975)</li>
+            <li>Ministerio de Educación Nacional. (2006). <em>Estándares básicos de competencias en lenguaje, matemáticas, ciencias y ciudadanas</em>. MEN.</li>
+            <li>Peirce, C. S. (1931–1958). <em>Collected papers of Charles Sanders Peirce</em> (C. Hartshorne, P. Weiss y A. W. Burks, Eds.; Vols. 1–8). Harvard University Press.</li>
+            <li>Peirce, C. S. (1974). <em>La ciencia de la semiótica</em> (B. Bugni, Trad.). Nueva Visión.</li>
+            <li>Saussure, F. de (1945). <em>Curso de lingüística general</em> (A. Alonso, Trad.). Losada. (Obra original publicada en 1916)</li>
+          </ul>
+        </div>
+        <div class="about-block">
+          <h3>Créditos de imágenes y recursos</h3>
+          <ul class="refs">
+            <li>Retrato de Ferdinand de Saussure: F. Jullien, Ginebra. Dominio público.</li>
+            <li>Retrato de Charles S. Peirce: fotografía de archivo. Dominio público.</li>
+            <li>Retratos de Roland Barthes y Umberto Eco: fotografías de archivo usadas con fines educativos.</li>
+            <li>Meme original: Cid Memes. Versión culta: La gramática del meme.</li>
+            <li>AURA VORTEX es una marca ficticia creada para este OVA.</li>
+            <li>Bibliotecas: Three.js (licencia MIT) y GSAP. Tipografías: Google Fonts (licencia SIL OFL).</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
 
 <div class="depth">
@@ -585,9 +731,9 @@ document.getElementById('cta').href = QUIZ_URL;
 /* Retratos: si falta la imagen, se muestran las iniciales en neón */
 const AUTHORS = [
   {src:'assets/eco.jpg',      ini:'UE',  stop:0, color:0xff3d9a, side:1},
-  {src:'assets/saussure.jpg', ini:'FdS', stop:1, color:0xff3d9a, side:-1},
-  {src:'assets/peirce.jpg',   ini:'CSP', stop:4, color:0x7dffb0, side:1},
-  {src:'assets/barthes.jpg',  ini:'RB',  stop:7, color:0xe8c26a, side:-1}
+  {src:'assets/saussure.jpg', ini:'FdS', stop:2, color:0xff3d9a, side:-1},
+  {src:'assets/peirce.jpg',   ini:'CSP', stop:5, color:0x7dffb0, side:1},
+  {src:'assets/barthes.jpg',  ini:'RB',  stop:8, color:0xe8c26a, side:-1}
 ];
 document.querySelectorAll('.portrait img').forEach(img=>{
   const fail = ()=>img.closest('.portrait').classList.add('noimg');
